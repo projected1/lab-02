@@ -1,6 +1,6 @@
 from datetime import datetime
 
-book_type_to_loan_days = (10, 5, 2)
+book_type_to_loan_days = (2, 5, 10)
 
 
 class Book:
@@ -8,7 +8,7 @@ class Book:
         self.name = name
         self.author = author
         self.publish_date = datetime.strptime(publish_date, '%B %d, %Y')
-        self.loan_days = book_type_to_loan_days[book_type]
+        self.loan_days = book_type_to_loan_days[book_type - 1]
         self.existing_copies = copies
         self.remaining_copies = copies
 

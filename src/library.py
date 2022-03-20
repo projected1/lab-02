@@ -1,3 +1,4 @@
+from uuid import UUID
 from customer import Customer
 from book import Book
 from loan import Loan
@@ -38,6 +39,8 @@ def create_loan(customer, book):
 
     loan = Loan(customer, book)
     loans.append(loan)
+
+    return loan
 
 
 def close_loan(customer, book):
@@ -94,10 +97,18 @@ def show_all_loans():
         print(loan)
 
 
-def show_late_loans():
+def get_late_loans():
+    loans = []
+
     for loan in get_all_loans():
-        if loan.is_late():
-            print(loan)
+        if loan.is_overdue():
+            loans.append(loan)
+    return loans
+
+
+def show_late_loans():
+    for loan in get_late_loans():
+        print(loan)
 
 
 def get_loans_by_customer(customer):
@@ -126,6 +137,10 @@ def get_loans_by_book(book):
 def show_loans_by_book(book):
     for loan in get_loans_by_book(book):
         print(loan)
+
+
+def find_customer_by_id(customer_id):
+    return customers[UUID(str(customer_id))]
 
 
 def find_book_by_name(book_name):

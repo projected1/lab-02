@@ -12,8 +12,8 @@ class Customer:
         return self.id == other.id
 
     def __str__(self):
-        return 'Customer name: %s, city: %s, age: %s' % \
-            (self.name, self.city, self.age)
+        return 'Customer id: %s, name: %s, city: %s, age: %s' % \
+            (self.id, self.name, self.city, self.age)
 
     def get_id(self):
         return self.id

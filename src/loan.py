@@ -26,4 +26,4 @@ class Loan:
         return self.book
 
     def is_overdue(self):
-        return datetime.now() - self.return_date > 0
+        return datetime.now().timestamp() - self.return_date.timestamp() > 0
