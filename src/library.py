@@ -1,3 +1,5 @@
+from customer import Customer
+from book import Book
 from loan import Loan
 
 customers = {}
@@ -14,6 +16,12 @@ def add_customer(customer):
 
 
 def create_loan(customer, book):
+    if not isinstance(customer, Customer):
+        raise TypeError('Invalid customer object')
+
+    if not isinstance(book, Book):
+        raise TypeError('Invalid book object')
+
     customer_loans = []
 
     # Find all customer loans
