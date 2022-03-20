@@ -3,46 +3,58 @@ from customer import Customer
 from book import Book
 
 if __name__ == '__main__':
-    print('Add new customer')
+    print('[v] Add new customer')
     customer = Customer('Jane', 'Tel Aviv', age=23)
     library.add_customer(customer)
-    library.show_all_customers()
+    customers = library.get_all_customers()
+    assert len(customers) == 1, 'Expected 1 customer but found %s' % len(customers)
+    assert customers[0] == customer
 
-    print('\nAdd new book')
+    print('[v] Add new book')
     book = Book('Catch-22', 'Joseph Heller', 'November 10, 1961', book_type=1, copies=5)
     library.add_book(book)
-    library.show_all_books()
+    books = library.get_all_books()
+    assert len(books) == 1, 'Expected 1 book but found %s' % len(books)
+    assert books[0] == book
 
-    print('\nCreate new loan')
+    print('[v] Create new loan')
     library.create_loan(customer, book)
-    library.show_all_loans()
+    loans = library.get_all_loans()
+    assert len(loans) == 1, 'Expected 1 loan but found %s' % len(loans)
 
-    print('\nShow loans by customer: %s' % customer.get_name())
-    library.show_loans_by_customer(customer)
+    print('[v] Get loans by customer: %s' % customer.get_name())
+    loans = library.get_loans_by_customer(customer)
+    assert len(loans) == 1, 'Expected 1 loan but found %s' % len(loans)
 
-    print('\nShow loans by book: %s' % book.get_name())
-    library.show_loans_by_book(book)
+    print('[v] Get loans by book: %s' % book.get_name())
+    loans = library.get_loans_by_book(book)
+    assert len(loans) == 1, 'Expected 1 loan but found %s' % len(loans)
 
-    print('\nFind book by name: %s' % book.get_name())
+    print('[v] Find book by name: %s' % book.get_name())
     book1 = library.find_book_by_name(book.get_name())
-    print(book1)
+    assert book == book1
 
-    print('\nTry remove book: %s' % book.get_name())
+    print('[v] Fail to remove book: %s' % book.get_name())
     library.remove_book(book)
-    library.show_all_books()
+    books = library.get_all_books()
+    assert len(books) == 1, 'Expected 1 book but found %s' % len(books)
 
-    print('\nTry remove customer: %s' % customer.get_name())
+    print('[v] Fail to remove customer: %s' % customer.get_name())
     library.remove_customer(customer)
-    library.show_all_customers()
+    customers = library.get_all_customers()
+    assert len(customers) == 1, 'Expected 1 customer but found %s' % len(customers)
 
-    print('\nClose existing loan: %s %s' % (customer.get_name(), book.get_name()))
+    print('[v] Close existing loan: %s %s' % (customer.get_name(), book.get_name()))
     library.close_loan(customer, book)
-    library.show_all_loans()
+    loans = library.get_all_loans()
+    assert not loans, 'Expected 0 loan but found %s' % len(loans)
 
-    print('\nTry remove book: %s' % book.get_name())
+    print('[v] Remove book: %s' % book.get_name())
     library.remove_book(book)
-    library.show_all_books()
+    books = library.get_all_books()
+    assert not books, 'Expected 0 book but found %s' % len(books)
 
-    print('\nTry remove customer: %s' % customer.get_name())
+    print('[v] Remove customer: %s' % customer.get_name())
     library.remove_customer(customer)
-    library.show_all_customers()
+    customers = library.get_all_customers()
+    assert not customers, 'Expected 0 customer but found %s' % len(customers)
