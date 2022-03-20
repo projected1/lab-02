@@ -1,4 +1,3 @@
-import uuid
 from datetime import datetime
 
 book_type_to_loan_days = (10, 5, 2)
@@ -6,7 +5,6 @@ book_type_to_loan_days = (10, 5, 2)
 
 class Book:
     def __init__(self, name, author, publish_date, book_type, copies):
-        self.id = uuid.uuid4()
         self.name = name
         self.author = author
         self.publish_date = datetime.strptime(publish_date, '%B %d, %Y')
@@ -15,14 +13,11 @@ class Book:
         self.remaining_copies = copies
 
     def __eq__(self, other):
-        return self.id == other.id
+        return self.name == other.name
 
     def __str__(self):
         return 'Book name: %s, author: %s, publish_date: %s, loan_days: %s, copies: %d' % \
             (self.name, self.author, self.publish_date, self.loan_days, self.remaining_copies)
-
-    def get_id(self):
-        return self.id
 
     def get_name(self):
         return self.name

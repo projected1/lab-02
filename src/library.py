@@ -1,16 +1,16 @@
 from loan import Loan
 
-customers = []
-books = []
+customers = {}
+books = {}
 loans = []
 
 
 def add_book(book):
-    books.append(book)
+    books[book.get_name()] = book
 
 
 def add_customer(customer):
-    customers.append(customer)
+    customers[customer.get_id()] = customer
 
 
 def create_loan(customer, book):
@@ -42,13 +42,13 @@ def close_loan(customer, book):
 
 
 def get_all_books():
-    return books
+    return list(books.values())
 
 
 def show_all_books():
     books = get_all_books()
 
-    if len(books) == 0:
+    if not books:
         print('No books')
         return
 
@@ -57,13 +57,13 @@ def show_all_books():
 
 
 def get_all_customers():
-    return customers
+    return list(customers.values())
 
 
 def show_all_customers():
     customers = get_all_customers()
 
-    if len(customers) == 0:
+    if not customers:
         print('No customers')
         return
 
@@ -121,20 +121,18 @@ def show_loans_by_book(book):
 
 
 def find_book_by_name(book_name):
-    for book in get_all_books():
-        if book.get_name() == book_name:
-            return book
+    return books[book_name]
 
 
 def remove_book(book):
     for loan in get_all_loans():
         if loan.get_book() == book:
             return
-    books.remove(book)
+    books.pop(book.get_name())
 
 
 def remove_customer(customer):
     for loan in get_all_loans():
         if loan.get_customer() == customer:
             return
-    customers.remove(customer)
+    customers.pop(customer.get_id())

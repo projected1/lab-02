@@ -4,8 +4,7 @@ In this project you will implement a simple system to manage books library.
 
 1. Your system should be able to manage the following entities:
     - Books
-        - Id (Unique)
-        - Name
+        - Name (Unique)
         - Author
         - Year Published
         - Type (1/2/3)
