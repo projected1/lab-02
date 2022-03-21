@@ -23,6 +23,10 @@ def create_loan(customer, book):
     if not isinstance(book, Book):
         raise TypeError('Invalid book object')
 
+    # Ensure we have enough copies to loan
+    if book.get_copies() < 1:
+        return 'There are no available copies of %s' % book.get_name()
+
     # Find all customer loans
     customer_loans = []
     for loan in loans:
