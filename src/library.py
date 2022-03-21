@@ -23,19 +23,20 @@ def create_loan(customer, book):
     if not isinstance(book, Book):
         raise TypeError('Invalid book object')
 
-    customer_loans = []
-
     # Find all customer loans
+    customer_loans = []
     for loan in loans:
         if loan.get_customer() == customer:
             customer_loans.append(loan)
 
+    # Limit the amount of loans per-customer
     if len(customer_loans) > 2:
-        return
+        return 'Customer reached max amount of loans: %s' % len(customer_loans)
 
+    # No new loans if old loans are overdue
     for loan in customer_loans:
         if loan.is_overdue():
-            return
+            return 'No new loans until overdue book is returned: %s' % loan.get_book().get_name()
 
     loan = Loan(customer, book)
     loans.append(loan)
