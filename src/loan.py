@@ -12,6 +12,9 @@ class Loan:
         self.return_date = \
             self.loan_date + timedelta(days=book.get_loan_days())
 
+    def __del__(self):
+        self.book.add_copy()
+
     def __eq__(self, other):
         return self.id == other.id
 

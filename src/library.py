@@ -54,6 +54,7 @@ def close_loan(customer, book):
     for loan in loans:
         if loan.get_customer() == customer and loan.get_book() == book:
             loans.remove(loan)
+            del loan
             return
 
 

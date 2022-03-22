@@ -53,9 +53,14 @@ if __name__ == '__main__':
     assert len(customers) == 1, 'Expected 1 customer but found %s' % len(customers)
 
     print('[v] Close existing loan: %s %s' % (customer.get_name(), book.get_name()))
+    prev_books_cnt = book.get_copies()
     library.close_loan(customer, book)
     loans = library.get_all_loans()
     assert not loans, 'Expected 0 loan but found %s' % len(loans)
+    cur_books_cnt = book.get_copies()
+    delta = cur_books_cnt - prev_books_cnt
+    assert delta == 1, 'Expected new book count to be %s but found %s' % \
+        (prev_books_cnt + 1, cur_books_cnt)
 
     print('[v] Remove book: %s' % book.get_name())
     library.remove_book(book)
